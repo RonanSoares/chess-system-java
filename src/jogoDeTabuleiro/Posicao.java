@@ -8,7 +8,6 @@ public class Posicao {
 	}
 
 	public Posicao(Integer linha, Integer coluna) {
-		super();
 		this.linha = linha;
 		this.coluna = coluna;
 	}
