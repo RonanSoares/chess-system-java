@@ -23,7 +23,7 @@ public class UI {
 		}else {
 			System.out.print(peca);
 		}
-		System.out.print(" "); // Imprimi espaço em branco para as peças não ficarem juntas.
+		System.out.print(" "); // Imprime espaço em branco para as peças não ficarem juntas.
 	}
 
 }
