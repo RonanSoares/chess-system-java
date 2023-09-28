@@ -39,4 +39,11 @@ public class Tabuleiro {
 		return pecas[posicao.getLinha()][posicao.getColuna()];
 		
 	}
+	
+	// Método para colocar uma peça em determinada posicão no tabuleiro.
+	public void lugarPeca(Peca peca, Posicao posicao) {
+		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
+		peca.posicao = posicao;
+		
+	}
 }
