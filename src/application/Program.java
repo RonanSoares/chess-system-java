@@ -3,7 +3,7 @@ package application;
 import java.util.Locale;
 import java.util.Scanner;
 
-import xadrez.PartidaDeXadrez;
+import xadrez.XadrezPartida;
 
 public class Program {
 
@@ -11,10 +11,10 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		PartidaDeXadrez partidaDeXadrez = new PartidaDeXadrez();
+		XadrezPartida xadrezPartida = new XadrezPartida();
 		
 		//Função para imprimir as peças da partida. Cria a classe UI UserInterface
-		UI.imprimirTabuleiro(partidaDeXadrez.getPecas()); // esse metodo recebe a matriz de peças da partida.
+		UI.imprimirTabuleiro(xadrezPartida.getPecas()); // esse metodo recebe a matriz de peças da partida.
 		
 		
 		sc.close();

@@ -2,10 +2,10 @@ package xadrez.pecas;
 
 import jogoDeTabuleiro.Tabuleiro;
 import xadrez.Cor;
-import xadrez.PecaDeXadrez;
+import xadrez.XadrezPeca;
 
 // Cria classe da peça torre.
-public class Torre extends PecaDeXadrez{
+public class Torre extends XadrezPeca{
 
 	public Torre(Tabuleiro tabuleiro, Cor cor) {
 		super(tabuleiro, cor);

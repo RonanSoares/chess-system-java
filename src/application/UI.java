@@ -1,10 +1,10 @@
 package application;
 
-import xadrez.PecaDeXadrez;
+import xadrez.XadrezPeca;
 
 public class UI {
 	
-	public static void imprimirTabuleiro(PecaDeXadrez[][] pecas) {
+	public static void imprimirTabuleiro(XadrezPeca[][] pecas) {
 		
 		for(int i = 0; i < pecas.length; i++) {
 			System.out.print((8-i) + " ");
@@ -17,7 +17,7 @@ public class UI {
 	}
 	
 	// Cria um método para imprimir uma peça de xadrez
-	public static void imprimirPeca(PecaDeXadrez peca) {
+	public static void imprimirPeca(XadrezPeca peca) {
 		if(peca == null) {
 			System.out.print("-");
 		}else {
