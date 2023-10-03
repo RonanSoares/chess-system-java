@@ -1,12 +1,13 @@
 package xadrez;
 
-public class XadrezException extends RuntimeException{
+import jogoDeTabuleiro.TabuleiroException;
 
+public class XadrezException extends TabuleiroException{
 	private static final long serialVersionUID = 1L;
 	
+	// Construtor para pegar a msg e enviar para a superclasse.
 	public XadrezException(String msg) {
-		super(msg);		
+		super(msg);
 	}
-	
 
 }

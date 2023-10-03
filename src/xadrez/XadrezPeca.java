@@ -15,8 +15,4 @@ public class XadrezPeca extends Peca{
 	public Cor getCor() {
 		return cor;
 	}
-
-	
-	
-	
 }

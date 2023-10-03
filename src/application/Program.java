@@ -3,7 +3,10 @@ package application;
 import java.util.Locale;
 import java.util.Scanner;
 
+import jogoDeTabuleiro.Posicao;
 import xadrez.XadrezPartida;
+import xadrez.XadrezPeca;
+import xadrez.XadrezPosicao;
 
 public class Program {
 
@@ -13,12 +16,22 @@ public class Program {
 		
 		XadrezPartida xadrezPartida = new XadrezPartida();
 		
+		while(true) {
+		
 		//Função para imprimir as peças da partida. Cria a classe UI UserInterface
 		UI.imprimirTabuleiro(xadrezPartida.getPecas()); // esse metodo recebe a matriz de peças da partida.
+		System.out.println();
+		System.out.print("Origem : ");
+		XadrezPosicao origem = UI.lerXadrezPosicao(sc);
 		
+		System.out.println();
+		System.out.print("Destino: ");
+		XadrezPosicao destino = UI.lerXadrezPosicao(sc);
+		
+		XadrezPeca capturadaPeca = xadrezPartida.performXadrezMover(origem, destino);
 		
 		sc.close();
-
+		
+		}
 	}
-
 }

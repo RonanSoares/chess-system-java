@@ -1,7 +1,12 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import jogoDeTabuleiro.TabuleiroException;
 import xadrez.Cor;
 import xadrez.XadrezPeca;
+import xadrez.XadrezPosicao;
 
 public class UI {
 
@@ -26,8 +31,21 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-	public static void imprimirTabuleiro(XadrezPeca[][] pecas) {
+	// Método para ler uma posição do usuário. Recebe o Scanner do programa principal
+	public static XadrezPosicao lerXadrezPosicao(Scanner sc) {
+		try {
+			String s = sc.nextLine();
+			char coluna = s.charAt(0);
+			int linha = Integer.parseInt(s.substring(1));// Recorta a String a partir da posicao 1 e converte para Integer
+			return new XadrezPosicao(coluna, linha);
+			
+		}
+		catch(TabuleiroException e) {
+			throw new InputMismatchException("Erro entrada de dados. Posição são a1 a h8.");
+		}
+	}
 
+	public static void imprimirTabuleiro(XadrezPeca[][] pecas) {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {

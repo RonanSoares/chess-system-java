@@ -12,6 +12,7 @@ public class Torre extends XadrezPeca{
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override	
 	public String toString() {
 		return "T"; // Peça torre.
 	}

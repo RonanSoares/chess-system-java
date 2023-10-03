@@ -5,6 +5,7 @@ import jogoDeTabuleiro.Posicao;
 public class XadrezPosicao {
 	private char coluna;
 	private int linha;
+	
 	public XadrezPosicao(char coluna, int linha) {
 		// Programação defensiva
 		if(coluna < 'a' || coluna > 'h' || linha < 1 || linha > 8) {
@@ -29,7 +30,7 @@ public class XadrezPosicao {
 	}
 	
 	// Dada uma posição na matriz, converte para a posicao xadrez.
-	protected static XadrezPosicao dePosicao(Posicao posicao) {
+	protected static XadrezPosicao fromPosicao(Posicao posicao) {
 		return new XadrezPosicao((char)('a' - posicao.getColuna()), 8 - posicao.getLinha());
 	}
 	

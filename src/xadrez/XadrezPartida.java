@@ -1,6 +1,7 @@
 package xadrez;
 
-import jogoDeTabuleiro.Tabuleiro;
+import jogoDeTabuleiro.Peca;
+import jogoDeTabuleiro.Posicao;
 import jogoDeTabuleiro.Tabuleiro;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
@@ -26,26 +27,48 @@ public class XadrezPartida {
 		return mat; // Retorna a matriz de peças da partida de xadrez.
 	}
 	
+	// Método para movimentar as peças
+	public XadrezPeca performXadrezMover(XadrezPosicao origemPosicao, XadrezPosicao destinoPosicao) {
+		Posicao origem = origemPosicao.toPosicao(); // Converte para posição matriz.
+		Posicao destino = destinoPosicao.toPosicao();
+		validarOrigemPosicao(origem); // Operação para validar a posição de origem.
+		Peca pecaCapturada = fazerMovimento(origem, destino);
+		return (XadrezPeca) pecaCapturada;
+	}
+	
+	private Peca fazerMovimento(Posicao origem, Posicao destino) {
+		Peca p = tabuleiro.removePeca(origem); // Retira a peça
+		Peca pecaCapturada = tabuleiro.removePeca(destino); // Remove a possível peça de destino
+		tabuleiro.colocarPeca(p, destino); // Coloca a peça na posição de destino.
+		return pecaCapturada;
+	}
+	
+	private void validarOrigemPosicao(Posicao posicao) {
+		if(!tabuleiro.temUmaPeca(posicao)) {
+			throw new XadrezException("Não existe peça na posicão de origem");
+		}
+	}	
+	
 	// Método para receber as coordenadas do xadrez.
-	private void lugarNovaPeca(char coluna, int linha, XadrezPeca peca) {
-		tabuleiro.lugarPeca(peca, new XadrezPosicao(coluna, linha).toPosicao());
+	private void colocarNovaPeca(char coluna, int linha, XadrezPeca peca) {
+		tabuleiro.colocarPeca(peca, new XadrezPosicao(coluna, linha).toPosicao());
 	}
 	
 	// Cria o método Inicio da partida
 	private void initialSetup() {
-		lugarNovaPeca('c', 1, new Torre(tabuleiro, Cor.BRANCO));
-		lugarNovaPeca('c', 2, new Torre(tabuleiro, Cor.BRANCO));
-		lugarNovaPeca('d', 2, new Torre(tabuleiro, Cor.BRANCO));
-		lugarNovaPeca('e', 2, new Torre(tabuleiro, Cor.BRANCO));
-		lugarNovaPeca('e', 1, new Torre(tabuleiro, Cor.BRANCO));
-		lugarNovaPeca('d', 1, new Rei(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('c', 1, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('c', 2, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('d', 2, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('e', 2, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('e', 1, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('d', 1, new Rei(tabuleiro, Cor.BRANCO));
 
-		lugarNovaPeca('c', 7, new Torre(tabuleiro, Cor.PRETO));
-		lugarNovaPeca('c', 8, new Torre(tabuleiro, Cor.PRETO));
-		lugarNovaPeca('d', 7, new Torre(tabuleiro, Cor.PRETO));
-		lugarNovaPeca('e', 7, new Torre(tabuleiro, Cor.PRETO));
-		lugarNovaPeca('e', 8, new Torre(tabuleiro, Cor.PRETO));
-		lugarNovaPeca('d', 8, new Rei(tabuleiro, Cor.PRETO));
+		colocarNovaPeca('c', 7, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeca('c', 8, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeca('d', 7, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeca('e', 7, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeca('e', 8, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeca('d', 8, new Rei(tabuleiro, Cor.PRETO));
 		
 	}
 }
