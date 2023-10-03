@@ -3,6 +3,7 @@ package xadrez;
 import jogoDeTabuleiro.Peca;
 import jogoDeTabuleiro.Posicao;
 import jogoDeTabuleiro.Tabuleiro;
+import jogoDeTabuleiro.TabuleiroException;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
 
@@ -46,6 +47,11 @@ public class XadrezPartida {
 	private void validarOrigemPosicao(Posicao posicao) {
 		if(!tabuleiro.temUmaPeca(posicao)) {
 			throw new XadrezException("Nao existe peça na posicao de origem");
+		}
+		// Para validar possíveis movimentos
+		if(!tabuleiro.peca(posicao).existeAlgumMovimentoPossivel()) {
+			throw new XadrezException("Nao existe movimento possivel para a peca");
+			
 		}
 	}	
 	

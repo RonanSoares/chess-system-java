@@ -16,4 +16,11 @@ public class Rei extends XadrezPeca{
 		return "R";
 	}
 
+	@Override
+	public boolean[][] possiveisMovimentos() {
+		// Cria uma matriz boleana do mesmo tamanho do tabuleiro. Toda posições iniciam como false
+		boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+		return mat;
+	}
+
 }
