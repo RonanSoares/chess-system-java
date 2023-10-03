@@ -30,6 +30,12 @@ public class UI {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+	
+	// Método para limpar a tela.
+	public static void limparTela() {
+		System.out.println("\033[H\033[2j");
+		System.out.flush();
+	}
 
 	// Método para ler uma posição do usuário. Recebe o Scanner do programa principal
 	public static XadrezPosicao lerXadrezPosicao(Scanner sc) {

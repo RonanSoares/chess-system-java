@@ -1,9 +1,11 @@
 package application;
 
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
 import jogoDeTabuleiro.Posicao;
+import xadrez.XadrezException;
 import xadrez.XadrezPartida;
 import xadrez.XadrezPeca;
 import xadrez.XadrezPosicao;
@@ -17,7 +19,8 @@ public class Program {
 		XadrezPartida xadrezPartida = new XadrezPartida();
 		
 		while(true) {
-		
+			try {
+		UI.limparTela();
 		//Função para imprimir as peças da partida. Cria a classe UI UserInterface
 		UI.imprimirTabuleiro(xadrezPartida.getPecas()); // esse metodo recebe a matriz de peças da partida.
 		System.out.println();
@@ -30,7 +33,15 @@ public class Program {
 		
 		XadrezPeca capturadaPeca = xadrezPartida.performXadrezMover(origem, destino);
 		
-		sc.close();
+			}
+			catch(XadrezException e) {
+				System.out.println(e.getMessage());
+				sc.nextLine(); // Para aguardar o programa dar um ENTER
+			}
+			catch(InputMismatchException e) {
+				System.out.println(e.getMessage());
+				sc.nextLine(); // Para aguardar o programa dar um ENTER
+			}
 		
 		}
 	}
