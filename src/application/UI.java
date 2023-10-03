@@ -33,7 +33,7 @@ public class UI {
 	
 	// Método para limpar a tela.
 	public static void limparTela() {
-		System.out.println("\033[H\033[2j");
+		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
 
