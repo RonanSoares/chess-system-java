@@ -47,7 +47,7 @@ public class UI {
 			
 		}
 		catch(TabuleiroException e) {
-			throw new InputMismatchException("Erro entrada de dados. Posição são a1 a h8.");
+			throw new InputMismatchException("Erro entrada de dados. Posicao são a1 a h8.");
 		}
 	}
 

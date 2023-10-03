@@ -29,7 +29,7 @@ public class Tabuleiro {
 	// Cria um método para retornar uma peça em uma determinada linha e coluna.
 		public Peca peca(int linha, int coluna) {
 			if(!posicaoExiste(linha, coluna)) {
-				throw new TabuleiroException("Não há posicão no tabuleiro");
+				throw new TabuleiroException("Não ha posicao no tabuleiro");
 			}
 			return pecas[linha][coluna]; // Retorna a matriz pecas nas linhas e colunas informadas.
 		}
@@ -37,7 +37,7 @@ public class Tabuleiro {
 	// Sobrecarga do metodo peca. Retorna a peça pela posicão indicada
 	public Peca peca(Posicao posicao) {
 		if(!posicaoExiste(posicao)) {
-			throw new TabuleiroException("Não há posicão no tabuleiro");
+			throw new TabuleiroException("Nao ha posicão no tabuleiro");
 		}
 		return pecas[posicao.getLinha()][posicao.getColuna()];
 		
@@ -46,7 +46,7 @@ public class Tabuleiro {
 	// Método para colocar uma peça em determinada posicão no tabuleiro.
 	public void colocarPeca(Peca peca, Posicao posicao) {
 		if(temUmaPeca(posicao)) {
-			throw new TabuleiroException("Já existe uma peça na posição" + posicao);
+			throw new TabuleiroException("Ja existe uma peça na posicao" + posicao);
 		}
 		pecas[posicao.getLinha()][posicao.getColuna()] = peca; // Atribui a peça na matriz
 		peca.posicao = posicao; // A peça não esta na posição nula e sim na posicão atribuida.
@@ -56,7 +56,7 @@ public class Tabuleiro {
 	public Peca removePeca(Posicao posicao) {
 		// Prog. defensiva
 		if(!posicaoExiste(posicao)) {
-			throw new TabuleiroException("Não há posicão no tabuleiro");
+			throw new TabuleiroException("Não ha posicão no tabuleiro");
 		}if(peca(posicao) == null){
 			return null;
 		}
@@ -81,7 +81,7 @@ public class Tabuleiro {
 	// método para verificar se tem uma peça na posicão.
 	public boolean temUmaPeca(Posicao posicao) {
 		if(!posicaoExiste(posicao)) {
-			throw new TabuleiroException("Não há posicão no tabuleiro");
+			throw new TabuleiroException("Nao ha posicao no tabuleiro");
 		}
 		return peca(posicao) != null;
 	}
