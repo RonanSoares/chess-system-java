@@ -28,6 +28,13 @@ public class XadrezPartida {
 		return mat; // Retorna a matriz de peças da partida de xadrez.
 	}
 	
+	public boolean[][] possiveisMovimentos(XadrezPosicao origemPosicao){
+		Posicao posicao = origemPosicao.toPosicao(); // Converter
+		validarOrigemPosicao(posicao);
+		return tabuleiro.peca(posicao).possiveisMovimentos();
+		
+	}
+	
 	// Método para movimentar as peças
 	public XadrezPeca performXadrezMover(XadrezPosicao origemPosicao, XadrezPosicao destinoPosicao) {
 		Posicao origem = origemPosicao.toPosicao(); // Converte para posição matriz.

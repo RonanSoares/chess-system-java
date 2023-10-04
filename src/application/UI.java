@@ -54,7 +54,18 @@ public class UI {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
-				imprimirPeca(pecas[i][j]); // Imprimir as peças
+				imprimirPeca(pecas[i][j], false); // Imprimir as peças
+			}
+			System.out.println(); // Quebra de linha.
+		}
+		System.out.println("  a b c d e f g h");
+	}
+	
+	public static void imprimirTabuleiro(XadrezPeca[][] pecas, boolean[][] possiveisMovimentos) {
+		for (int i = 0; i < pecas.length; i++) {
+			System.out.print((8 - i) + " ");
+			for (int j = 0; j < pecas.length; j++) {
+				imprimirPeca(pecas[i][j], possiveisMovimentos[i][j]); // Imprimir as peças
 			}
 			System.out.println(); // Quebra de linha.
 		}
@@ -62,9 +73,13 @@ public class UI {
 	}
 
 	// Cria um método para imprimir uma peça de xadrez
-	private static void imprimirPeca(XadrezPeca peca) {
+	private static void imprimirPeca(XadrezPeca peca, boolean background) {
+		if(background) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
+		
 		if (peca == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         }
         else {
             if (peca.getCor() == Cor.BRANCO) {
