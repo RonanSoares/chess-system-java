@@ -20,20 +20,20 @@ public class Torre extends XadrezPeca {
 
 	@Override
 	public boolean[][] possiveisMovimentos() {
-		// Cria uma matriz boleana do mesmo tamanho do tabuleiro. Toda posições iniciam
-		// como false
-		boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+		// Cria uma matriz boleana do mesmo tamanho do tabuleiro. Toda posições iniciam como false
+		boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];		
 		
-	/*	// Verifica se tem movimentos livres.
 		Posicao p = new Posicao(0, 0);
 	
+		// Verifica se tem movimentos livres.
+		
 		// Acima
 		p.attValores(posicao.getLinha() - 1, posicao.getColuna());
 		// Enquanto a posição estiver vaga, será marcado como verdadeiro.
-		while (getTabuleiro().posicaoExiste(p) && !getTabuleiro().temUmaPeca(p))
-			;
-		mat[p.getLinha()][p.getColuna()] = true;
-		p.setLinha(p.getLinha() - 1); // Avança mais uma casa, enquanto a casa estiver vazia.
+		while (getTabuleiro().posicaoExiste(p) && !getTabuleiro().temUmaPeca(p)) {			
+			mat[p.getLinha()][p.getColuna()] = true;
+			p.setLinha(p.getLinha() - 1); // Avança mais uma casa, enquanto a casa estiver vazia.
+		}
 		if (getTabuleiro().posicaoExiste(p) && haPecaOponente(p)) { // Se houver uma peça adversária...
 			mat[p.getLinha()][p.getColuna()] = true; // avança mais uma casa.
 		}
@@ -41,10 +41,10 @@ public class Torre extends XadrezPeca {
 		// A esquerda
 		p.attValores(posicao.getLinha(), posicao.getColuna() - 1);
 		// Enquanto a posição estiver vaga, será marcado como verdadeiro.
-		while (getTabuleiro().posicaoExiste(p) && !getTabuleiro().temUmaPeca(p))
-			;
-		mat[p.getLinha()][p.getColuna()] = true;
-		p.setColuna(p.getColuna() - 1); // Avança mais uma casa, enquanto a casa estiver vazia.
+		while (getTabuleiro().posicaoExiste(p) && !getTabuleiro().temUmaPeca(p)) {			
+			mat[p.getLinha()][p.getColuna()] = true;
+			p.setColuna(p.getColuna() - 1); // Avança mais uma casa, enquanto a casa estiver vazia.
+		}
 		if (getTabuleiro().posicaoExiste(p) && haPecaOponente(p)) { // Se houver uma peça adversária...
 			mat[p.getLinha()][p.getColuna()] = true; // avança mais uma casa.
 		}
@@ -52,9 +52,10 @@ public class Torre extends XadrezPeca {
 		// A Direita
 		p.attValores(posicao.getLinha(), posicao.getColuna() + 1);
 		// Enquanto a posição estiver vaga, será marcado como verdadeiro.
-		while (getTabuleiro().posicaoExiste(p) && !getTabuleiro().temUmaPeca(p));
-		mat[p.getLinha()][p.getColuna()] = true;
-		p.setColuna(p.getColuna() + 1); // Avança mais uma casa, enquanto a casa estiver vazia.
+		while (getTabuleiro().posicaoExiste(p) && !getTabuleiro().temUmaPeca(p)) {
+			mat[p.getLinha()][p.getColuna()] = true;
+			p.setColuna(p.getColuna() + 1); // Avança mais uma casa, enquanto a casa estiver vazia.
+		}
 		if (getTabuleiro().posicaoExiste(p) && haPecaOponente(p)) { // Se houver uma peça adversária...
 			mat[p.getLinha()][p.getColuna()] = true; // avança mais uma casa.
 		}
@@ -62,13 +63,14 @@ public class Torre extends XadrezPeca {
 		// Abaixo
 		p.attValores(posicao.getLinha() + 1, posicao.getColuna());
 		// Enquanto a posição estiver vaga, será marcado como verdadeiro.
-		while (getTabuleiro().posicaoExiste(p) && !getTabuleiro().temUmaPeca(p));
+		while (getTabuleiro().posicaoExiste(p) && !getTabuleiro().temUmaPeca(p)) {
 		mat[p.getLinha()][p.getColuna()] = true;
 		p.setLinha(p.getLinha() + 1); // Avança mais uma casa, enquanto a casa estiver vazia.
+		}
 		if (getTabuleiro().posicaoExiste(p) && haPecaOponente(p)) { // Se houver uma peça adversária...
 			mat[p.getLinha()][p.getColuna()] = true; // avança mais uma casa.
 		}
-*/
+
 		return mat;
 	}
 }
