@@ -25,6 +25,12 @@ public class Posicao {
 		this.coluna = coluna;
 	}
 	
+	// Método para atualizar novos valores para linhas e colunas.
+	public void attValores(int linha, int coluna) {
+		this.linha = linha;
+		this.coluna = coluna;
+	}
+	
 	@Override
 	public String toString() {
 		return linha + ", " + coluna;

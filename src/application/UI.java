@@ -43,8 +43,7 @@ public class UI {
 			String s = sc.nextLine();
 			char coluna = s.charAt(0);
 			int linha = Integer.parseInt(s.substring(1));// Recorta a String a partir da posicao 1 e converte para Integer
-			return new XadrezPosicao(coluna, linha);
-			
+			return new XadrezPosicao(coluna, linha);			
 		}
 		catch(TabuleiroException e) {
 			throw new InputMismatchException("Erro entrada de dados. Posicao são a1 a h8.");
