@@ -22,7 +22,7 @@ public class Program {
 			try {
 		UI.limparTela();
 		//Função para imprimir as peças da partida. Cria a classe UI UserInterface
-		UI.imprimirTabuleiro(xadrezPartida.getPecas()); // esse metodo recebe a matriz de peças da partida.
+		UI.imprimirPartida(xadrezPartida); // esse metodo recebe a matriz de peças da partida.
 		System.out.println();
 		System.out.print("Origem : ");
 		XadrezPosicao origem = UI.lerXadrezPosicao(sc);
