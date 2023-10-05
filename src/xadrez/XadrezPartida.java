@@ -1,5 +1,8 @@
 package xadrez;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jogoDeTabuleiro.Peca;
 import jogoDeTabuleiro.Posicao;
 import jogoDeTabuleiro.Tabuleiro;
@@ -12,6 +15,9 @@ public class XadrezPartida {
 	private int vez;
 	private Cor atualJogador;
 	private Tabuleiro tabuleiro;
+	
+	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
+	private List<Peca> pecasCapturadas = new ArrayList<>();
 	
 	public XadrezPartida(){ 
 		tabuleiro = new Tabuleiro(8, 8);
@@ -60,9 +66,14 @@ public class XadrezPartida {
 	}
 	
 	private Peca fazerMovimento(Posicao origem, Posicao destino) {
-		Peca p = tabuleiro.removePeca(origem); // Retira a peça
+		Peca p = tabuleiro.removePeca(origem); // Retira a peça do tabuleiro
 		Peca pecaCapturada = tabuleiro.removePeca(destino); // Remove a possível peça de destino
 		tabuleiro.colocarPeca(p, destino); // Coloca a peça na posição de destino.
+		if(pecaCapturada != null) {
+			pecasNoTabuleiro.remove(pecaCapturada); // Retira a peça da lista do tabuleiro
+			pecasCapturadas.add(pecaCapturada);// E adiciona na lista de peças capturadas.
+			
+		}
 		return pecaCapturada;
 	}
 	
@@ -92,7 +103,8 @@ public class XadrezPartida {
 	
 	// Método para receber as coordenadas do xadrez.
 	private void colocarNovaPeca(char coluna, int linha, XadrezPeca peca) {
-		tabuleiro.colocarPeca(peca, new XadrezPosicao(coluna, linha).toPosicao());
+		tabuleiro.colocarPeca(peca, new XadrezPosicao(coluna, linha).toPosicao()); //Coloca peça tabuleiro
+		pecasNoTabuleiro.add(peca); // Coloca peça na lista de tabuleiro.
 	}
 	
 	// Cria o método Inicio da partida

@@ -1,7 +1,11 @@
 package application;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import jogoDeTabuleiro.TabuleiroException;
 import xadrez.Cor;
@@ -51,11 +55,13 @@ public class UI {
 			}
 		}
 		
-		public static void imprimirPartida(XadrezPartida xadrezPartida) {
+		public static void imprimirPartida(XadrezPartida xadrezPartida, List<XadrezPeca> capturada) {
 			imprimirTabuleiro(xadrezPartida.getPecas());
 			System.out.println();
+			imprimirPecasCapturadas(capturada);
+			System.out.println();
 			System.out.println("Vez : " + xadrezPartida.getVez());
-			System.out.println("Aguardando jogador... " + xadrezPartida.getAtualJogador());
+			System.out.println("Aguardando jogador: " + xadrezPartida.getAtualJogador());
 			
 		}
 
@@ -99,6 +105,22 @@ public class UI {
 	            }
 	        }
 	        System.out.print(" ");
+	}
+	
+		// Método para imprimir as peças capturadas
+	private static void imprimirPecasCapturadas(List<XadrezPeca> capturada) {
+		List<XadrezPeca> branca = capturada.stream().filter(x -> x.getCor() == Cor.BRANCO).collect(Collectors.toList());
+		List<XadrezPeca> preta = capturada.stream().filter(x -> x.getCor() == Cor.PRETO).collect(Collectors.toList());
+		System.out.println("Pecas Capturadas:");
+		System.out.print("Branca: ");
+		System.out.print(ANSI_WHITE);// Para garantir que a impressão seja branca
+		System.out.println(Arrays.toString(branca.toArray()));// Padrão de imprimir um array em java
+		System.out.print(ANSI_RESET); // Para resetar a cor da impressão.
+		
+		System.out.print("Preta : ");
+		System.out.print(ANSI_YELLOW);
+		System.out.println(Arrays.toString(preta.toArray()));
+		System.out.print(ANSI_RESET);
 	}
 
 }
