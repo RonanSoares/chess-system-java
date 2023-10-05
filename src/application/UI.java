@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import jogoDeTabuleiro.TabuleiroException;
@@ -62,6 +61,10 @@ public class UI {
 			System.out.println();
 			System.out.println("Vez : " + xadrezPartida.getVez());
 			System.out.println("Aguardando jogador: " + xadrezPartida.getAtualJogador());
+			
+			if(XadrezPartida.getCheck()) {
+				System.out.println("CHECK!");
+			}
 			
 		}
 
