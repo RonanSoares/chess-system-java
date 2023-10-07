@@ -17,6 +17,7 @@ public class XadrezPartida {
 	private Cor atualJogador;
 	private Tabuleiro tabuleiro;
 	private static boolean check;
+	private static boolean checkMate;
 	
 	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
 	private List<Peca> pecasCapturadas = new ArrayList<>();
@@ -40,6 +41,10 @@ public class XadrezPartida {
 	
 	public static boolean getCheck() {
 		return check;
+	}
+	
+	public static boolean getCheckMate() {
+		return checkMate;
 	}
 
 	//Método retorna uma matriz de peças de xadrez para essa partida.
@@ -77,8 +82,12 @@ public class XadrezPartida {
 		
 		check = (testarCheck(oponente(atualJogador))) ? true : false;
 		
-		proximaVez();
-		return (XadrezPeca) pecaCapturada;
+		if(testarCheckMate(oponente(atualJogador))) {
+			checkMate = true;
+		}else {
+			proximaVez();
+		}		
+		return (XadrezPeca)pecaCapturada;
 	}
 	
 	private Peca fazerMovimento(Posicao origem, Posicao destino) {
@@ -160,6 +169,32 @@ public class XadrezPartida {
 		return false;
 	}
 	
+	// Método para testar o checkMate
+	private boolean testarCheckMate(Cor cor) {
+		if(!testarCheck(cor)) {
+			return false;
+		}
+		List<Peca> list = pecasNoTabuleiro.stream().filter(x -> ((XadrezPeca)x).getCor() == cor).collect(Collectors.toList());
+		for(Peca p : list) {
+			boolean[][] mat = p.possiveisMovimentos();
+			for(int i = 0; i < tabuleiro.getLinhas(); i++) {
+				for(int j = 0; j < tabuleiro.getColunas(); j++) {
+					if(mat[i][j]) { // Se movimento possível
+						Posicao origem = ((XadrezPeca)p).getXadrezPosicao().toPosicao(); //Movim. p para matriz
+						Posicao destino = new Posicao(i,j);
+						Peca capturadaPeca = fazerMovimento(origem, destino); // Faz o movimento
+						boolean testarCheck = testarCheck(cor); //  Testa se o Rei ainda esta em check
+						desfazerMovimento(origem, destino, capturadaPeca); // Desfaz o movimento
+						if(!testarCheck) { // Se não estiver em check, o movimento tirou o Rei do check.
+							return false;
+						}						
+					}
+				}
+			}		
+		}
+		return true;
+	}	
+	
 	// Método para receber as coordenadas do xadrez.
 	private void colocarNovaPeca(char coluna, int linha, XadrezPeca peca) {
 		tabuleiro.colocarPeca(peca, new XadrezPosicao(coluna, linha).toPosicao()); //Coloca peça tabuleiro
@@ -168,19 +203,12 @@ public class XadrezPartida {
 	
 	// Cria o método Inicio da partida
 	private void initialSetup() {
-		colocarNovaPeca('c', 1, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeca('c', 2, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeca('d', 2, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeca('e', 2, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeca('e', 1, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeca('d', 1, new Rei(tabuleiro, Cor.BRANCO));
-
-		colocarNovaPeca('c', 7, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeca('c', 8, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeca('d', 7, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeca('e', 7, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeca('e', 8, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeca('d', 8, new Rei(tabuleiro, Cor.PRETO));
+		colocarNovaPeca('h', 7, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('d', 1, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.BRANCO));
 		
+		colocarNovaPeca('b', 8, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeca('a', 8, new Rei(tabuleiro, Cor.PRETO));
+				
 	}
 }
