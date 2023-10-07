@@ -64,7 +64,7 @@ public class Peao extends XadrezPeca{
 	
 	@Override
 	public String toString() {
-		return "p";
+		return "P";
 		
 	}
 }
