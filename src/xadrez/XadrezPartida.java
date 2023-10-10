@@ -1,5 +1,6 @@
 package xadrez;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ public class XadrezPartida {
 	private static boolean check;
 	private static boolean checkMate;
 	private XadrezPeca passoVulneravel;
+	private XadrezPeca promocao;
 
 	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
 	private List<Peca> pecasCapturadas = new ArrayList<>();
@@ -53,6 +55,10 @@ public class XadrezPartida {
 
 	public XadrezPeca getPassoVulneravel() {
 		return passoVulneravel;
+	}	
+
+	public XadrezPeca getPromocao() {
+		return promocao;
 	}
 
 	// Método retorna uma matriz de peças de xadrez para essa partida.
@@ -89,7 +95,17 @@ public class XadrezPartida {
 		}
 
 		XadrezPeca moveuPeca = (XadrezPeca) tabuleiro.peca(destino);
-
+		
+		// Movimento especial promoção
+		promocao = null;
+		if(moveuPeca instanceof Peao) {
+			if ((moveuPeca.getCor() == Cor.BRANCO && destino.getLinha() == 0) || (moveuPeca.getCor() == Cor.PRETO && destino.getLinha() == 7)) {
+				promocao = (XadrezPeca)tabuleiro.peca(destino);
+				promocao = substituirPromocaoPeca("Q");				
+				
+			}
+		}		
+		
 		check = (testarCheck(oponente(atualJogador))) ? true : false;
 
 		if (testarCheckMate(oponente(atualJogador))) {
@@ -105,6 +121,36 @@ public class XadrezPartida {
 			passoVulneravel = null;
 		}
 		return (XadrezPeca) pecaCapturada;
+	}
+	
+	// Método para substituir a peça jogada especial promoção.
+	public XadrezPeca substituirPromocaoPeca(String tipo) {
+		if(promocao == null) {
+			throw new IllegalStateException("Nao ha peca para ser promovida");
+		}
+		if(!tipo.equals("B") && !tipo.equals("C") && !tipo.equals("R") && !tipo.equals("Q")){
+			throw new InvalidParameterException("Tipo invalido para promocao");
+		}
+		
+		Posicao pos = promocao.getXadrezPosicao().toPosicao(); // Removeu a peça na posicao
+		Peca p = tabuleiro.removePeca(pos);                    // Guardou na variável p;
+		pecasNoTabuleiro.remove(p);                            // Remove peça do tabuleiro.		
+		
+		XadrezPeca novaPeca = novaPeca(tipo, promocao.getCor()); // Instancia a peça.
+		tabuleiro.colocarPeca(novaPeca, pos); // Coloca a peça na posicão pos da peça promovida.
+		pecasNoTabuleiro.add(novaPeca);       // Adiciona a peça na lista peças no tabuleiro
+		
+		return novaPeca;                      // Retorna a peça instanciada.
+		
+	}
+	
+	// Método auxiliar para receber a peça a ser substituida na posicao pos.
+	private XadrezPeca novaPeca(String tipo, Cor cor) {
+		if(tipo.equals("B")) return new Bispo(tabuleiro, cor);
+		if(tipo.equals("C")) return new Cavalo(tabuleiro, cor);
+		if(tipo.equals("Q")) return new Rainha(tabuleiro, cor);
+		return new Torre(tabuleiro, cor);
+		
 	}
 
 	private Peca fazerMovimento(Posicao origem, Posicao destino) {

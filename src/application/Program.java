@@ -3,10 +3,8 @@ package application;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
-import jogoDeTabuleiro.Posicao;
 import xadrez.XadrezException;
 import xadrez.XadrezPartida;
 import xadrez.XadrezPeca;
@@ -40,8 +38,18 @@ public class Program {
 
 				if (capturadaPeca != null) {
 					capturada.add(capturadaPeca);
-				}			
+				}
+				
+				// Testar movimento especial promoção.
+				if(xadrezPartida.getPromocao() != null) {
+					System.out.println("Entre com a peça promovida (B/C/R/Q)");
+					String tipo = sc.nextLine();
+					xadrezPartida.substituirPromocaoPeca(tipo);
+				}
+				
 			}
+			
+		
 			catch (XadrezException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine(); // Para aguardar o programa dar um ENTER
