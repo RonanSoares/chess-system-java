@@ -1,5 +1,6 @@
 package application;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -42,8 +43,13 @@ public class Program {
 				
 				// Testar movimento especial promoção.
 				if(xadrezPartida.getPromocao() != null) {
-					System.out.println("Entre com a peça promovida (B/C/R/Q)");
-					String tipo = sc.nextLine();
+					System.out.print("Entre com a peça promovida (B/C/R/Q): ");
+					String tipo = sc.nextLine().toUpperCase(); // Para maiuscula
+					if(!tipo.equals("B") && !tipo.equals("C") && !tipo.equals("R") && !tipo.equals("Q")){
+						System.out.println("Valor invalido. Entre com (B/C/R/Q): ");
+						tipo = sc.nextLine().toUpperCase();
+						
+					}
 					xadrezPartida.substituirPromocaoPeca(tipo);
 				}
 				
